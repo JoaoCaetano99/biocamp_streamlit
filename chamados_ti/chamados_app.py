@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 
 # ====== CONFIGURAÇÕES DO E-MAIL ======
 EMAIL_REMETENTE = "tecsuporteti@biocamp.com.br"
-SENHA_DE_APP = "gzzi gvmq hfte hltg"  # ← substitua por st.secrets se quiser esconder no futuro
+SENHA_DE_APP = "gzzi gvmq hfte hltg"  # ← Geração obrigatória se conta tiver 2FA
 EMAIL_SUPORTE_TI = "tecsuporteti@biocamp.com.br"
 
 # ====== FUNÇÃO: Enviar e-mail para o suporte TI ======
@@ -67,7 +67,6 @@ def enviar_confirmacao(nome, email, setor):
 
 # ====== INTEGRAÇÃO COM GOOGLE SHEETS (via secrets) ======
 creds_dict = json.loads(st.secrets["CREDENTIALS_JSON"])
-
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
@@ -90,10 +89,16 @@ if enviado:
         data = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         novo_chamado = [data, nome, email, setor, problema, "Aberto"]
 
+        # Primeiro: tentar registrar no Sheets
         try:
             sheet.append_row(novo_chamado)
-            enviar_para_suporte(nome, email, setor, problema)
-            enviar_confirmacao(nome, email, setor)
-            st.success("Chamado enviado com sucesso! Confirmação enviada por e-mail.")
         except Exception as e:
-            st.error(f"Erro ao registrar o chamado ou enviar e-mail: {e}")
+            st.error(f"❌ Erro ao registrar o chamado no Google Sheets: {e}")
+        else:
+            # Depois: tentar enviar os e-mails
+            try:
+                enviar_para_suporte(nome, email, setor, problema)
+                enviar_confirmacao(nome, email, setor)
+                st.success("✅ Chamado registrado e e-mails enviados com sucesso!")
+            except Exception as e:
+                st.warning(f"⚠️ Chamado registrado, mas houve erro ao enviar os e-mails: {e}")
