@@ -7,6 +7,12 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+# CONFIGURAÇÃO DO TÍTULO E ÍCONE DA ABA
+st.set_page_config(
+    page_title="Chamados TI · Biocamp",
+    page_icon="🖥️"
+)
+
 # ====== CONFIGURAÇÕES DO E-MAIL ======
 EMAIL_REMETENTE = "tecsuporteti@biocamp.com.br"
 SENHA_DE_APP = "gzzi gvmq hfte hltg"  # ← Geração obrigatória se conta tiver 2FA
