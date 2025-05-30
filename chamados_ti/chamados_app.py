@@ -34,6 +34,9 @@ def show_logo(logo_path, width=200):
 # ====== EXIBIR O LOGO ======
 show_logo("chamados_ti/logo-LGPD.png", width=350)
 
+# ====== TÍTULO COM EMOJI ======
+st.title("🖥️ Abertura de Chamados - TI")
+
 # ====== CONFIGURAÇÕES DO E-MAIL ======
 EMAIL_REMETENTE = "tecsuporteti@biocamp.com.br"
 SENHA_DE_APP = "gzzi gvmq hfte hltg"  # ← Geração obrigatória se conta tiver 2FA
@@ -48,7 +51,7 @@ def enviar_para_suporte(nome, email, setor, problema):
     📌 Nome: {nome}
     📧 E-mail: {email}
     🏢 Setor: {setor}
-    📝 Descrição:
+    📜 Descrição:
     {problema}
 
     [Enviado automaticamente pelo sistema Streamlit]
@@ -100,8 +103,6 @@ client = gspread.authorize(creds)
 sheet = client.open_by_key("1VBblQeeZXF-jR4WqKk-lHtkafARmrekyss49pL6uRmQ").sheet1
 
 # ====== INTERFACE STREAMLIT ======
-st.title("Abertura de Chamados - TI")
-
 with st.form("form_chamado"):
     nome = st.text_input("Seu nome")
     email = st.text_input("Seu e-mail")
