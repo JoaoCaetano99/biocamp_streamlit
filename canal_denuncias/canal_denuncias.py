@@ -40,20 +40,16 @@ sheet = client.open_by_key("1tMnVMHoafuuVmzpUPG2gLhKyCWEOCvtzaWBD5KBMUQc").sheet
 
 # === Interface do app ===
 st.title("📢 Canal de Denúncias Anônimas")
-st.markdown(
-    """
-    O canal de denúncias da empresa existe para garantir um ambiente de trabalho íntegro, seguro e respeitoso. 
-    Por isso, pedimos a todos os colaboradores que façam uso deste recurso com responsabilidade.
 
-    Denúncias devem ser feitas de forma consciente, verdadeira e com boa fé. 
-    O canal não é espaço para fofocas, intrigas ou acusações infundadas. 
-    O mau uso pode comprometer a credibilidade do sistema e prejudicar pessoas injustamente.
+st.markdown("""
+O canal de denúncias da empresa existe para garantir um ambiente de trabalho íntegro, seguro e respeitoso. Por isso, pedimos a todos os colaboradores que façam uso deste recurso com responsabilidade.
 
-    **Lembre-se:** usar o canal de forma incorreta também é uma violação ética.
+Denúncias devem ser feitas de forma consciente, verdadeira e com boa fé. O canal não é espaço para fofocas, intrigas ou acusações infundadas. O mau uso pode comprometer a credibilidade do sistema e prejudicar pessoas injustamente.
 
-    Contamos com a sua seriedade. Juntos, manteremos um ambiente justo para todos.
-    """
-)
+**Lembre-se:** usar o canal de forma incorreta também é uma violação ética.
+
+Contamos com a sua seriedade. Juntos, mantemos um ambiente justo para todos.
+""")
 
 # === Formulário de envio ===
 with st.form("form_denuncia"):
