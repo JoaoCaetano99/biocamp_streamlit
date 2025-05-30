@@ -3,6 +3,11 @@ from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
+st.set_page_config(
+    page_title="Canal de Denúncias · Biocamp",
+    page_icon="📢"
+)
+
 # === Carregar credenciais do secrets ===
 creds_dict = st.secrets["google"]
 
