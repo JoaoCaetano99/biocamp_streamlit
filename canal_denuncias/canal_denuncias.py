@@ -4,14 +4,14 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import base64
 
-# ====== CONFIGURAÇÃO DA PÁGINA ======
+# ✅ Este comando deve ser o PRIMEIRO do Streamlit
 st.set_page_config(
     page_title="Canal de Denúncias · Biocamp",
     page_icon="📢",
     layout="centered"
 )
 
-# ====== FUNÇÃO: Converter imagem em base64 para exibir no app ======
+# === Função para converter imagem em base64 ===
 def get_base64_of_bin_file(bin_file):
     with open(bin_file, 'rb') as f:
         data = f.read()
@@ -28,29 +28,39 @@ def show_logo(logo_path, width=350):
         unsafe_allow_html=True
     )
 
-# ====== EXIBIR O LOGO DA EMPRESA ======
+# === Exibir logo ===
 show_logo("canal_denuncias/logo-LGPD.png", width=350)
 
-# ====== INTEGRAÇÃO COM GOOGLE SHEETS ======
+# === Autenticação com Google Sheets ===
 creds_dict = st.secrets["google"]
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 sheet = client.open_by_key("1tMnVMHoafuuVmzpUPG2gLhKyCWEOCvtzaWBD5KBMUQc").sheet1
 
-# ====== INTERFACE DO APP ======
+# === Interface do app ===
 st.title("📢 Canal de Denúncias Anônimas")
 st.markdown(
-    "Este é um canal confidencial para registrar denúncias internas. "
-    "Todas as informações são tratadas com seriedade e sigilo absoluto."
+    """
+    O canal de denúncias da empresa existe para garantir um ambiente de trabalho íntegro, seguro e respeitoso. 
+    Por isso, pedimos a todos os colaboradores que façam uso deste recurso com responsabilidade.
+
+    Denúncias devem ser feitas de forma consciente, verdadeira e com boa fé. 
+    O canal não é espaço para fofocas, intrigas ou acusações infundadas. 
+    O mau uso pode comprometer a credibilidade do sistema e prejudicar pessoas injustamente.
+
+    **Lembre-se:** usar o canal de forma incorreta também é uma violação ética.
+
+    Contamos com a sua seriedade. Juntos, manteremos um ambiente justo para todos.
+    """
 )
 
-# ====== FORMULÁRIO DE ENVIO ======
+# === Formulário de envio ===
 with st.form("form_denuncia"):
     denuncia = st.text_area("Descreva sua denúncia de forma anônima:", height=200)
     enviado = st.form_submit_button("Enviar denúncia")
 
-# ====== LÓGICA DE ENVIO ======
+# === Lógica de envio ===
 if enviado:
     if not denuncia.strip():
         st.warning("⚠️ O campo de denúncia não pode estar vazio.")
