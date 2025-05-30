@@ -1,19 +1,14 @@
 import streamlit as st
-from datetime import datetime
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 
-import streamlit as st
-from datetime import datetime
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
-
-# ✅ TEM QUE VIR AQUI, logo após os imports
 st.set_page_config(
     page_title="Canal de Denúncias · Biocamp",
     page_icon="📢",
     layout="centered"
 )
+
+from datetime import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
 # === Carregar credenciais do secrets ===
 creds_dict = st.secrets["google"]
