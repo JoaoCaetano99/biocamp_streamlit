@@ -32,7 +32,7 @@ def show_logo(logo_path, width=200):
     )
 
 # ====== EXIBIR O LOGO ======
-show_logo("chamados_ti/LOGO BIOCAMP EM JPG.jpg")
+show_logo("chamados_ti/LOGO BIOCAMP PB.jpg")
 
 # ====== CONFIGURAÇÕES DO E-MAIL ======
 EMAIL_REMETENTE = "tecsuporteti@biocamp.com.br"
