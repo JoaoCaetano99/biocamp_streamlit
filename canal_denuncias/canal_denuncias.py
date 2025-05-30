@@ -2,17 +2,15 @@ import streamlit as st
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import json
 
-# === Carregar credenciais do arquivo JSON ===
-with open("credenciais.json") as f:
-    creds_dict = json.load(f)
+# === Carregar credenciais do secrets ===
+creds_dict = st.secrets["google"]
 
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
 client = gspread.authorize(creds)
 
-# ✅ ID real da sua planilha:
+# ✅ ID real da sua planilha
 sheet = client.open_by_key("1tMnVMHoafuuVmzpUPG2gLhKyCWEOCvtzaWBD5KBMUQc").sheet1
 
 # === Interface do app ===
